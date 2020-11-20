@@ -27,7 +27,6 @@ def process_list(li):
 def item_generator(json_input, lookup_key):
     if isinstance(json_input, dict):
         for k, v in json_input.items():
-            # if k == lookup_key:
             if lookup_key in k and not isinstance(v, dict):
                 yield v
             else:
@@ -36,22 +35,20 @@ def item_generator(json_input, lookup_key):
         for item in json_input:
             yield from item_generator(item, lookup_key)
 
-# use to strip shenanigans preventing filename extraction from url
-
 
 def process_json(filename):
-    li = []
-    with open(filename) as j:
-        data = json.load(j)
-        url_list = []
-        for url in item_generator(data, "url"):
-            if isinstance(url, list):
-                for it in url:
-                    url_list.append(it)
-            else:
-                url_list.append(url)
+    try:
+        with open(filename) as j:
+            data = json.load(j)
+            url_list = []
+            for url in item_generator(data, "url"):
+                if isinstance(url, list):
+                    for it in url:
+                        url_list.append(it)
+                else:
+                    url_list.append(url)
 
-        process_list(url_list)
-
-
-
+            process_list(url_list)
+            print("Done. Find files in img/")
+    except OSError:
+        print("Couldn't find file named data.json in res folder. \nExiting.")

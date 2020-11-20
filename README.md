@@ -5,4 +5,5 @@ Simple script written in python to download image files (.jpg and .png) from url
 
 
 ## Instructions
-place the json-like file in the "res" folder. Rename the json-like file to data.json. Run main.py and hopefully you get some results (fingers-crossed)
+Create a folder "res" at the root. Place the json-like file in the "res" folder. 
+Rename the json-like file to data.json. Run main.py and hopefully you get some results (fingers-crossed)
